@@ -1,24 +1,48 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import {
+  Paper,
+  MantineProvider,
+  ColorSchemeProvider,
+  ColorScheme,
+} from "@mantine/core";
+import Cards from "./Components/Cards";
+import LightAndDarkModeButton from "./Components/LightDarkButtons";
+import { useHotkeys, useLocalStorage } from "@mantine/hooks";
+import { HeaderSimple } from "./Components/HeaderSimple";
+import { HeaderMenu } from "./Components/HeaderMenu";
 
 function App() {
+  const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
+    key: "mantine-color-scheme",
+    defaultValue: "light",
+    getInitialValueInEffect: true,
+  });
+
+  const toggleColorScheme = (value?: ColorScheme) =>
+    setColorScheme(value || (colorScheme === "dark" ? "light" : "dark"));
+
+  useHotkeys([["mod+J", () => toggleColorScheme()]]);
+
+  
+  const links : { link: string; label: string }[]                                           = [{link:'www.ww.ww',label:'Informmación'},{link:'www.ww.ww',label:'Productos'},{link:'www.ww.ww',label:'Contactos'}];
+
+  // const links2: { link: string; label: string; links: { link: string; label: string }[] }[] = [{link:'www.ww.ww',label:'Info', links:[{link:"",label:"submenu 1"}]}];
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ColorSchemeProvider
+        colorScheme={colorScheme}
+        toggleColorScheme={toggleColorScheme}
+      >
+        <MantineProvider theme={{ colorScheme }}>
+          <Paper style={{ minHeight: "100vh" }}>
+            {/* <HeaderMenu links={links2}></HeaderMenu> */}
+            <HeaderSimple links={links}></HeaderSimple>
+            <Cards></Cards>
+            <LightAndDarkModeButton></LightAndDarkModeButton>
+          </Paper>
+        </MantineProvider>
+      </ColorSchemeProvider>
     </div>
   );
 }
