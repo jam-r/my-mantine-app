@@ -24,7 +24,7 @@ function App() {
   useHotkeys([["mod+J", () => toggleColorScheme()]]);
 
   
-  const links : { link: string; label: string }[]                                           = [{link:'www.ww.ww',label:'Informmación'},{link:'www.ww.ww',label:'Productos'},{link:'www.ww.ww',label:'Contactos'}];
+  const links : { link: string; label: string }[]                                           = [{link:'www.ww.ww',label:'Información'},{link:'www.ww.ww',label:'Productos'},{link:'www.ww.ww',label:'Contactos'}];
 
   // const links2: { link: string; label: string; links: { link: string; label: string }[] }[] = [{link:'www.ww.ww',label:'Info', links:[{link:"",label:"submenu 1"}]}];
 
