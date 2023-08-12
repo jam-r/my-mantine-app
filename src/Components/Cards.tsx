@@ -1,6 +1,9 @@
 import { Badge, Button, Card, Grid, Group, Image, Text } from "@mantine/core";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Cards() {
+  const navigate = useNavigate();
   return (
     <div className="App">
       <Grid justify="space-around">
@@ -27,7 +30,7 @@ function Cards() {
               Norway
             </Text>
 
-            <Button variant="light" color="blue" fullWidth mt="md" radius="md">
+            <Button onClick={()=>navigate("/detail")} variant="light" color="blue" fullWidth mt="md" radius="md">
               Cotizar
             </Button>
           </Card>
@@ -55,7 +58,7 @@ function Cards() {
               Norway
             </Text>
 
-            <Button variant="light" color="blue" fullWidth mt="md" radius="md">
+            <Button  onClick={()=>navigate("/detail")} variant="light" color="blue" fullWidth mt="md" radius="md">
               Cotizar
             </Button>
           </Card>
@@ -83,7 +86,7 @@ function Cards() {
               Norway
             </Text>
 
-            <Button variant="light" color="blue" fullWidth mt="md" radius="md">
+            <Button onClick={()=>navigate("/detail")} variant="light" color="blue" fullWidth mt="md" radius="md">
               Cotizar
             </Button>
           </Card>
@@ -111,7 +114,7 @@ function Cards() {
               Norway
             </Text>
 
-            <Button variant="light" color="blue" fullWidth mt="md" radius="md">
+            <Button onClick={()=>navigate("/detail")} variant="light" color="blue" fullWidth mt="md" radius="md">
               Cotizar
             </Button>
           </Card>
