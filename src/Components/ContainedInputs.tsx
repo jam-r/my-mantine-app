@@ -8,7 +8,6 @@ import {
   Box,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { useState } from "react";
 
 const useStyles = createStyles((theme) => ({
   root: {
@@ -31,28 +30,19 @@ const useStyles = createStyles((theme) => ({
 }));
 
 export function ContainedInputs() {
-  const [porciones, setPorciones] = useState("");
-  const [saborBiscocho, setSaborBiscocho] = useState("");
-  const [relleno, setRelleno] = useState("");
-  const [tarjetaDedicatoria, setTarjetaDedicatoria] = useState("");
-  const [topper, setTopper] = useState("No");
-  const [botellaWhiskey, setBotellaWhiskey] = useState("No");
-  const [rosasNaturales, setRosasNaturales] = useState("No");
-  const [rellenoNutella, setRellenoNutella] = useState("No");
-  const [requerimientosEspeciales, setRequerimientosEspeciales] = useState("");
 
   const handleSendMessage = () => {
     const phoneNumber = "56967468133"; // Número de teléfono del destinatario
     let message = "¡Hola! quiero encargar una torta con el siguiente detalle: "; // Mensaje a enviar
-    message += "\nPorciones:  " + porciones;
-    message += "\nSabores Bizcocho:  " + saborBiscocho;
-    message += "\nRellenos:  " + relleno;
-    message += "\nTarjeta con dedicatoria:  " + tarjetaDedicatoria;
-    message += "\nTopper:  " + topper;
-    message += "Mini botella de whiskey:  " + botellaWhiskey;
-    message += "Rosas naturales:  " + rosasNaturales;
-    message += "\nRelleno de nutella:  " + rellenoNutella;
-    message += "\nRequerimientos especiales:  " + requerimientosEspeciales;
+    message += "\n*Porciones:*  " + form.values.porciones;
+    message += "\n*Sabores Bizcocho:*  " + form.values.saborBiscocho;
+    message += "\n*Rellenos:*  " + form.values.relleno;
+    message += "\n*Tarjeta con dedicatoria:*  " + (form.values.tarjetaDedicatoria?"Si":"No");
+    message += "\n*Topper:*  " + (form.values.topper?"Si":"No");
+    message += "\n*Mini botella de whiskey:*  " + (form.values.botellaWhiskey?"Si":"No");
+    message += "\n*Rosas naturales:*  " + (form.values.rosasNaturales?"Si":"No");
+    message += "\n*Relleno de nutella:*  " + (form.values.rellenoNutella?"Si":"No");
+    message += "\n*Requerimientos especiales:*  " + (form.values.requerimientosEspeciales);
     // Crear la URL con el esquema de WhatsApp
     const whatsappUrl = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(
       message
@@ -67,21 +57,31 @@ export function ContainedInputs() {
 
   const form = useForm({
     initialValues: {
-      email: "",
-      termsOfService: false,
+        porciones: "",
+        saborBiscocho: "",
+        relleno: "",
+        tarjetaDedicatoria: false,
+        topper: false,
+        botellaWhiskey: false,
+        rosasNaturales: false,
+        rellenoNutella: false,
+        requerimientosEspeciales: "",
     },
     validate: {
-      email: (value) => (/^\S+@\S+$/.test(value) ? null : "Invalid email"),
+        porciones: (value) => (""===value.trim() ?  "Seleccione porciones"  :null),
+        saborBiscocho: (value) => (""===value.trim() ?"Seleccione sabor biscocho"  :null ),
+        relleno: (value) => (""===value.trim() ?"Seleccione relleno" :  null),
     },
   });
   return (
     <div>
-      <form onSubmit={form.onSubmit((values) => console.log(values))}>
+      <form onSubmit={form.onSubmit(handleSendMessage)}>
         <Box maw={400} mx={"auto"}>
           <Select
             mt="md"
             withinPortal
             withAsterisk
+            required
             data={[
               "6 a 8",
               "10 a 12",
@@ -97,12 +97,14 @@ export function ContainedInputs() {
             label="Porciones"
             //   onChange={setPorciones('1')}
             classNames={classes}
+            {...form.getInputProps("porciones")}
           />
 
           <Select
             mt="md"
             withinPortal
             withAsterisk
+            required
             data={[
               "Chocolate",
               "Limon",
@@ -111,6 +113,7 @@ export function ContainedInputs() {
               "Vainilla",
               "Zanahoria",
             ]}
+            {...form.getInputProps("saborBiscocho")}
             placeholder="Elige una opcion"
             label="Sabores Bizcocho"
             classNames={classes}
@@ -120,6 +123,7 @@ export function ContainedInputs() {
             mt="md"
             withinPortal
             withAsterisk
+            required
             data={[
               "Chocolate blanco",
               "Chocolate semi amargo",
@@ -129,6 +133,7 @@ export function ContainedInputs() {
               "Mermelada de frutilla",
               "Mocca",
             ]}
+            {...form.getInputProps("relleno")}
             placeholder="Elige una opcion"
             label="Rellenos"
             classNames={classes}
@@ -146,22 +151,25 @@ export function ContainedInputs() {
           <Checkbox
             mt="md"
             label="Tarjeta con dedicatoria"
-            {...form.getInputProps("termsOfService", { type: "checkbox" })}
+            {...form.getInputProps("tarjetaDedicatoria", { type: "checkbox" })}
           />
-          <Checkbox mt="md" label="Topper" />
-          <Checkbox mt="md" label="Mini botella de whiskey" />
-          <Checkbox mt="md" label="Rosas naturales" />
-          <Checkbox mt="md" label="Relleno de nutella" />
+          <Checkbox mt="md" label="Topper" 
+            {...form.getInputProps("topper", { type: "checkbox" })}/>
+          <Checkbox mt="md" label="Mini botella de whiskey" 
+            {...form.getInputProps("botellaWhiskey", { type: "checkbox" })}/>
+          <Checkbox mt="md" label="Rosas naturales" 
+            {...form.getInputProps("rosasNaturales", { type: "checkbox" })}/>
+          <Checkbox mt="md" label="Relleno de nutella" 
+            {...form.getInputProps("rellenoNutella", { type: "checkbox" })}/>
 
           <TextInput
             mt="md"
             label="Requerimientos especiales"
             placeholder="Escribe tus requerimientos especiales"
-            classNames={classes}
             {...form.getInputProps("requerimientosEspeciales")}
           />
 
-          <Button mt="md" type="submit" onClick={handleSendMessage}>
+          <Button mt="md" type="submit" >
             Enviar por whatsapp
           </Button>
         </Box>
