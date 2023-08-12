@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/my-mantine-app/static/css/main.073c9b0a.css",
-    "main.js": "/my-mantine-app/static/js/main.4e3019a2.js",
+    "main.js": "/my-mantine-app/static/js/main.bff2eb46.js",
     "static/js/787.5e15adf4.chunk.js": "/my-mantine-app/static/js/787.5e15adf4.chunk.js",
     "index.html": "/my-mantine-app/index.html",
     "main.073c9b0a.css.map": "/my-mantine-app/static/css/main.073c9b0a.css.map",
-    "main.4e3019a2.js.map": "/my-mantine-app/static/js/main.4e3019a2.js.map",
+    "main.bff2eb46.js.map": "/my-mantine-app/static/js/main.bff2eb46.js.map",
     "787.5e15adf4.chunk.js.map": "/my-mantine-app/static/js/787.5e15adf4.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.073c9b0a.css",
-    "static/js/main.4e3019a2.js"
+    "static/js/main.bff2eb46.js"
   ]
 }
