@@ -1,39 +1,34 @@
-import { TextInput, Checkbox, Button, Group, Box } from '@mantine/core';
-import { useForm } from '@mantine/form';
-  
-  function Detail() {
-    const form = useForm({
-      initialValues: {
-        email:'',
-        termsOfService: false
-      },
-      validate:{
-        email:(value)=> (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
-      },
-    })
+import {
+  Container,
+  Grid,
+  SimpleGrid,
+  Skeleton,
+  useMantineTheme,
+  rem,
+} from "@mantine/core";
+import { ContainedInputs } from "./ContainedInputs";
+import { PhotoDetail } from "./PhotoDetail";
 
-    return (
-      <Box maw={300} mx={"auto"}>
-        <form onSubmit={form.onSubmit((values) => console.log(values))}>
-          <TextInput
-          withAsterisk
-          label="Email"
-          placeholder='tu@mail.com'
-          {...form.getInputProps('email')}/>
+const PRIMARY_COL_HEIGHT = rem(300);
 
-          <Checkbox
-            mt="md"
-            label="I agree to sell my privacy"
-            {...form.getInputProps('termsOfService', {type:'checkbox'})}/>
-        
+function Detail() {
+  const theme = useMantineTheme();
+  const SECONDARY_COL_HEIGHT = `calc(${PRIMARY_COL_HEIGHT} / 2 - ${theme.spacing.md} / 2)`;
 
-          <Group position='right' mt="md">
-            <Button type="submit">Submit</Button>
-          </Group>
-        </form>
-      </Box>
-    );
-  }
+  return ( 
+    <Container my="md">
+      <SimpleGrid cols={2} spacing="md" breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
+        <PhotoDetail></PhotoDetail>
+        <Grid gutter="md">
+          <Grid.Col>
+            <ContainedInputs></ContainedInputs>
+          </Grid.Col>
+        </Grid>
+      </SimpleGrid>
+    </Container>
   
-  export default Detail;
-  
+  // <ContainedInputs></ContainedInputs>
+  )
+}
+
+export default Detail;
