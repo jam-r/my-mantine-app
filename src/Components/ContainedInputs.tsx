@@ -7,7 +7,8 @@ import {
   TextInput,
   Box,
 } from "@mantine/core";
-import { useForm } from "@mantine/form";
+import { isNotEmpty, useForm } from "@mantine/form";
+import { useState } from "react";
 
 const useStyles = createStyles((theme) => ({
   root: {
@@ -30,19 +31,28 @@ const useStyles = createStyles((theme) => ({
 }));
 
 export function ContainedInputs() {
-
   const handleSendMessage = () => {
+    calcularPrecio();
     const phoneNumber = "56967468133"; // Número de teléfono del destinatario
     let message = "¡Hola! quiero encargar una torta con el siguiente detalle: "; // Mensaje a enviar
     message += "\n*Porciones:*  " + form.values.porciones;
     message += "\n*Sabores Bizcocho:*  " + form.values.saborBiscocho;
     message += "\n*Rellenos:*  " + form.values.relleno;
-    message += "\n*Tarjeta con dedicatoria:*  " + (form.values.tarjetaDedicatoria?"Si":"No");
-    message += "\n*Topper:*  " + (form.values.topper?"Si":"No");
-    message += "\n*Mini botella de whiskey:*  " + (form.values.botellaWhiskey?"Si":"No");
-    message += "\n*Rosas naturales:*  " + (form.values.rosasNaturales?"Si":"No");
-    message += "\n*Relleno de nutella:*  " + (form.values.rellenoNutella?"Si":"No");
-    message += "\n*Requerimientos especiales:*  " + (form.values.requerimientosEspeciales);
+    message +=
+      "\n*Tarjeta con dedicatoria:*  " +
+      (tarjetaDedicatoria ? "Si" : "No");
+    message += "\n*Topper:*  " + (topper ? "Si" : "No");
+    message +=
+      "\n*Mini botella de whiskey:*  " +
+      (botellaWhiskey ? "Si" : "No");
+    message +=
+      "\n*Rosas naturales:*  " + (rosasNaturales ? "Si" : "No");
+    message +=
+      "\n*Relleno de nutella:*  " + (rellenoNutella ? "Si" : "No");
+    message +=
+        "\n*Requerimientos especiales:*  " + form.values.requerimientosEspeciales;
+    message +=
+        "\n*Valor:*  " + precioTotal;
     // Crear la URL con el esquema de WhatsApp
     const whatsappUrl = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(
       message
@@ -51,26 +61,111 @@ export function ContainedInputs() {
     // Abrir la ventana de WhatsApp
     window.open(whatsappUrl);
   };
+  const precioBase = 15000;
+  const precioTarjeta = 3000;
+  const precioTopper = 3000;
+  const precioWhiskey = 3000;
+  const precioRosas = 3000;
+  const precioNutella = 3000;
+  let [tarjetaDedicatoria, setTarjetaDedicatoria] = useState(false);
+  let [topper, setTopper] = useState(false);
+  let [botellaWhiskey, setBotellaWhiskey] = useState(false);
+  let [rosasNaturales, setRosasNaturales] = useState(false);
+  let [rellenoNutella, setRellenoNutella] = useState(false);
+  let [precioTotal, setPrecioTotal] = useState(precioBase);
+
+  
+  const actualizarTarjetaDedicatoria = (tarjetaDedicatoria: boolean | ((prevState: boolean) => boolean)) => {
+    setTarjetaDedicatoria(tarjetaDedicatoria);
+    if(tarjetaDedicatoria){
+        precioTotal += precioTarjeta;
+    }else{
+        precioTotal -= precioTarjeta;
+    }
+    setPrecioTotal(precioTotal);
+  };
+
+  const actualizarTopper = (topper: boolean | ((prevState: boolean) => boolean)) => {
+    setTopper(topper);
+    if(topper){
+        precioTotal += precioTopper;
+    }else{
+        precioTotal -= precioTopper;
+    }
+    setPrecioTotal(precioTotal);
+  };
+
+  const actualizarBotellaWhiskey = (botellaWhiskey: boolean | ((prevState: boolean) => boolean)) => {
+    setBotellaWhiskey(botellaWhiskey);
+    if(botellaWhiskey){
+        precioTotal += precioWhiskey;
+    }else{
+        precioTotal -= precioWhiskey;
+    }
+    setPrecioTotal(precioTotal);
+  };
+
+  const actualizarRosasNaturales = (rosasNaturales: boolean | ((prevState: boolean) => boolean)) => {
+    setRosasNaturales(rosasNaturales);
+    if(rosasNaturales){
+        precioTotal += precioRosas;
+    }else{
+        precioTotal -= precioRosas;
+    }
+    setPrecioTotal(precioTotal);
+  };
+  
+  const actualizarRellenoNutella = (rellenoNutella: boolean | ((prevState: boolean) => boolean)) => {
+    setRellenoNutella(rellenoNutella);
+    if(rellenoNutella){
+        precioTotal += precioNutella;
+    }else{
+        precioTotal -= precioNutella;
+    }
+    setPrecioTotal(precioTotal);
+  };
+
+  
+
+  const calcularPrecio = () => {
+    precioTotal = precioBase; 
+    if (tarjetaDedicatoria) {
+      precioTotal += precioTarjeta;
+    }
+    if (topper) {
+      precioTotal += precioTopper;
+    }
+    if (botellaWhiskey) {
+      precioTotal += precioWhiskey;
+    }
+    if (rosasNaturales) {
+      precioTotal += precioRosas;
+    }
+    if (rellenoNutella) {
+      precioTotal += precioNutella;
+    }
+    setPrecioTotal(precioTotal);
+  };
 
   // You can add these classes as classNames to any Mantine input, it will work the same
   const { classes } = useStyles();
 
   const form = useForm({
     initialValues: {
-        porciones: "",
-        saborBiscocho: "",
-        relleno: "",
-        tarjetaDedicatoria: false,
-        topper: false,
-        botellaWhiskey: false,
-        rosasNaturales: false,
-        rellenoNutella: false,
-        requerimientosEspeciales: "",
+      porciones: "",
+      saborBiscocho: "",
+      relleno: "",
+      tarjetaDedicatoria: false,
+      topper: false,
+      botellaWhiskey: false,
+      rosasNaturales: false,
+      rellenoNutella: false,
+      requerimientosEspeciales: "",
     },
     validate: {
-        porciones: (value) => (""===value.trim() ?  "Seleccione porciones"  :null),
-        saborBiscocho: (value) => (""===value.trim() ?"Seleccione sabor biscocho"  :null ),
-        relleno: (value) => (""===value.trim() ?"Seleccione relleno" :  null),
+      porciones: isNotEmpty(),
+      saborBiscocho: isNotEmpty(),
+      relleno: isNotEmpty(),
     },
   });
   return (
@@ -83,19 +178,18 @@ export function ContainedInputs() {
             withAsterisk
             required
             data={[
-              "6 a 8",
-              "10 a 12",
-              "15",
-              "20",
-              "25",
-              "30",
-              "40",
-              "50",
-              "60",
+              { value: "6 a 8", label: "6 a 8" },
+              { value: "10 a 12", label: "10 a 12" },
+              { value: "15", label: "15" },
+              { value: "20", label: "20" },
+              { value: "25", label: "25" },
+              { value: "30", label: "30" },
+              { value: "40", label: "40" },
+              { value: "50", label: "50" },
+              { value: "60", label: "60" },
             ]}
             placeholder="Elige una opcion"
             label="Porciones"
-            //   onChange={setPorciones('1')}
             classNames={classes}
             {...form.getInputProps("porciones")}
           />
@@ -106,12 +200,12 @@ export function ContainedInputs() {
             withAsterisk
             required
             data={[
-              "Chocolate",
-              "Limon",
-              "Naranja",
-              "Red velvet",
-              "Vainilla",
-              "Zanahoria",
+              { value: "Chocolate", label: "Chocolate" },
+              { value: "Limon", label: "Limon" },
+              { value: "Naranja", label: "Naranja" },
+              { value: "Red velvet", label: "Red velvet" },
+              { value: "Vainilla", label: "Vainilla" },
+              { value: "Zanahoria", label: "Zanahoria" },
             ]}
             {...form.getInputProps("saborBiscocho")}
             placeholder="Elige una opcion"
@@ -125,13 +219,13 @@ export function ContainedInputs() {
             withAsterisk
             required
             data={[
-              "Chocolate blanco",
-              "Chocolate semi amargo",
-              "Manjar",
-              "Mermelada de berries",
-              "Mermelada de duraznos",
-              "Mermelada de frutilla",
-              "Mocca",
+              { value: "Chocolate blanco", label: "Chocolate blanco" },
+              { value: "Chocolate semi amargo", label: "Chocolate semi amargo" },
+              { value: "Manjar", label: "Manjar" },
+              { value: "Mermelada de berries", label: "Mermelada de berries" },
+              { value: "Mermelada de duraznos", label: "Mermelada de duraznos" },
+              { value: "Mermelada de frutilla", label: "Mermelada de frutilla" },
+              { value: "Mocca", label: "Mocca" },
             ]}
             {...form.getInputProps("relleno")}
             placeholder="Elige una opcion"
@@ -139,37 +233,50 @@ export function ContainedInputs() {
             classNames={classes}
           />
 
-          {/* <DatePickerInput
-          mt="md"
-          popoverProps={{ withinPortal: true }}
-          label="Departure date"
-          placeholder="When will you leave?"
-          classNames={classes}
-          clearable={false}
-        /> */}
+          <Checkbox
+            mt="md"
+            label="Tarjeta con dedicatoria (+3000)"
+            onChange={(event) => actualizarTarjetaDedicatoria(event.currentTarget.checked)}
+            checked={tarjetaDedicatoria}
+          />
 
           <Checkbox
             mt="md"
-            label="Tarjeta con dedicatoria"
-            {...form.getInputProps("tarjetaDedicatoria", { type: "checkbox" })}
+            label="Topper (+3000)"
+            onChange={(event) => actualizarTopper(event.currentTarget.checked)}
+            checked={topper}
           />
-          <Checkbox mt="md" label="Topper" 
-            {...form.getInputProps("topper", { type: "checkbox" })}/>
-          <Checkbox mt="md" label="Mini botella de whiskey" 
-            {...form.getInputProps("botellaWhiskey", { type: "checkbox" })}/>
-          <Checkbox mt="md" label="Rosas naturales" 
-            {...form.getInputProps("rosasNaturales", { type: "checkbox" })}/>
-          <Checkbox mt="md" label="Relleno de nutella" 
-            {...form.getInputProps("rellenoNutella", { type: "checkbox" })}/>
+
+          <Checkbox
+            mt="md"
+            label="Mini botella de whiskey (+3000)"
+            onChange={(event) => actualizarBotellaWhiskey(event.currentTarget.checked)}
+            checked={botellaWhiskey}
+          />
+
+          <Checkbox
+            mt="md"
+            label="Rosas naturales (+3000)"
+            onChange={(event) => actualizarRosasNaturales(event.currentTarget.checked)}
+            checked={rosasNaturales}
+          />
+
+          <Checkbox
+            mt="md"
+            label="Relleno de nutella (+3000)"
+            onChange={(event) => actualizarRellenoNutella(event.currentTarget.checked)}
+            checked={rellenoNutella}
+          />
 
           <TextInput
             mt="md"
             label="Requerimientos especiales"
-            placeholder="Escribe tus requerimientos especiales"
+            classNames={classes}
+            placeholder="Escribe tus requerimientos especiales" 
             {...form.getInputProps("requerimientosEspeciales")}
           />
-
-          <Button mt="md" type="submit" >
+          <h1>Valor:{precioTotal}</h1>
+          <Button mt="md" type="submit">
             Enviar por whatsapp
           </Button>
         </Box>
