@@ -16,6 +16,7 @@ import {
 import Home from "./components/Home";
 import Detail from "./components/Detail";
 import { HeaderResponsive } from "./components/HeaderResponsive";
+import { FooterSocial } from "./components/FooterSocial";
 
 function App() {
   const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
@@ -55,6 +56,7 @@ function App() {
               <Route path="/my-mantine-app" element={<Home></Home>}></Route>
               <Route path="/my-mantine-app/detail" element={<Detail></Detail>}></Route>
             </Routes>
+            <FooterSocial></FooterSocial>
             </Paper>
           </BrowserRouter>
           
