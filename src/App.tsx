@@ -15,8 +15,6 @@ import {
 } from "react-router-dom";
 import Home from "./components/Home";
 import Detail from "./components/Detail";
-import { HeaderMiddle } from "./components/HeaderMiddle";
-import { HeaderSearch } from "./components/HeaderSearch";
 import { HeaderResponsive } from "./components/HeaderResponsive";
 
 function App() {
@@ -44,7 +42,7 @@ function App() {
       links: [
       ],
     },
-    { link: "/my-mantine-app/datos", label: "Datos de transferencia", links: [] },
+    { link: "/my-mantine-app/datos", label: "Datos de contacto", links: [] },
   ];
 
   return (
