@@ -75,6 +75,9 @@ export function PhotoDetail() {
       Delicada y esponjosa torta de biscocho: el placer perfecto en cada bocado. ¡Sorprende tus sentidos con su textura suave y sabor exquisito!
       </Text>
 
+      <Text mt="xl" fw={500} fz="lg">
+          Precio base: $15000
+        </Text>
     </Card>
   );
 }

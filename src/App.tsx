@@ -3,6 +3,8 @@ import {
   MantineProvider,
   ColorSchemeProvider,
   ColorScheme,
+  Text,
+  Paper,
 } from "@mantine/core";
 import { useHotkeys, useLocalStorage } from "@mantine/hooks";
 import {
@@ -10,11 +12,12 @@ import {
   BrowserRouter,
   Route,
   Routes,
-  createBrowserRouter,
 } from "react-router-dom";
 import Home from "./components/Home";
 import Detail from "./components/Detail";
-import LightAndDarkModeButton from "./components/LightDarkButtons";
+import { HeaderMiddle } from "./components/HeaderMiddle";
+import { HeaderSearch } from "./components/HeaderSearch";
+import { HeaderResponsive } from "./components/HeaderResponsive";
 
 function App() {
   const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
@@ -36,36 +39,27 @@ function App() {
     links: { link: string; label: string }[];
   }[] = [
     {
-      link: "www.ww.ww",
-      label: "Productos",
+      link: "/my-mantine-app",
+      label: "Tortas",
       links: [
-        { link: "", label: "Producto 1" },
-        { link: "", label: "Producto 2" },
-        { link: "", label: "Producto 3" },
       ],
     },
-    { link: "www.ww.ww", label: "Info", links: [] },
-    { link: "www.ww.ww", label: "Contacto", links: [] },
+    { link: "/my-mantine-app/datos", label: "Datos de transferencia", links: [] },
   ];
 
   return (
     <div className="App">
-      <ColorSchemeProvider
-        colorScheme={colorScheme}
-        toggleColorScheme={toggleColorScheme}
-      >
-        <MantineProvider theme={{ colorScheme }}>
-          
         {/* <LightAndDarkModeButton></LightAndDarkModeButton> */}
           <BrowserRouter>
+            <HeaderResponsive links={links2}></HeaderResponsive>
+            <Paper style={{ minHeight: "100vh" }} mt="md">
             <Routes>
               <Route path="/my-mantine-app" element={<Home></Home>}></Route>
-              <Route path="/detail" element={<Detail></Detail>}></Route>
+              <Route path="/my-mantine-app/detail" element={<Detail></Detail>}></Route>
             </Routes>
+            </Paper>
           </BrowserRouter>
           
-        </MantineProvider>
-      </ColorSchemeProvider>
     </div>
   );
 }

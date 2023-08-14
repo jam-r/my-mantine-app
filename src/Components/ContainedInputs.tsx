@@ -6,6 +6,7 @@ import {
   Select,
   TextInput,
   Box,
+  Text,
 } from "@mantine/core";
 import { isNotEmpty, useForm } from "@mantine/form";
 import { useState } from "react";
@@ -16,14 +17,13 @@ const useStyles = createStyles((theme) => ({
   },
 
   input: {
-    height: rem(54),
-    paddingTop: rem(18),
+    // height: rem(54),
+    // paddingTop: rem(18),
   },
 
   label: {
-    position: "absolute",
+    // position: "absolute",
     pointerEvents: "none",
-    fontSize: theme.fontSizes.xs,
     paddingLeft: theme.spacing.sm,
     paddingTop: `calc(${theme.spacing.sm} / 2)`,
     zIndex: 1,
@@ -155,11 +155,6 @@ export function ContainedInputs() {
       porciones: "",
       saborBiscocho: "",
       relleno: "",
-      tarjetaDedicatoria: false,
-      topper: false,
-      botellaWhiskey: false,
-      rosasNaturales: false,
-      rellenoNutella: false,
       requerimientosEspeciales: "",
     },
     validate: {
@@ -168,26 +163,49 @@ export function ContainedInputs() {
       relleno: isNotEmpty(),
     },
   });
+
+  const rellenos: {value: string; label: string} [] = [
+    { value: "Chocolate blanco", label: "Chocolate blanco" },
+    { value: "Chocolate semi amargo", label: "Chocolate semi amargo" },
+    { value: "Manjar", label: "Manjar" },
+    { value: "Mermelada de berries", label: "Mermelada de berries" },
+    { value: "Mermelada de duraznos", label: "Mermelada de duraznos" },
+    { value: "Mermelada de frutilla", label: "Mermelada de frutilla" },
+    { value: "Mocca", label: "Mocca" },
+  ];
+  
+  const sabores: {value: string; label: string} [] = [
+    { value: "Chocolate", label: "Chocolate" },
+    { value: "Limon", label: "Limon" },
+    { value: "Naranja", label: "Naranja" },
+    { value: "Red velvet", label: "Red velvet" },
+    { value: "Vainilla", label: "Vainilla" },
+    { value: "Zanahoria", label: "Zanahoria" },
+  ];
+
+  const porciones : {value: string; label: string} [] = [
+    { value: "6 a 8", label: "6 a 8" },
+    { value: "10 a 12", label: "10 a 12" },
+    { value: "15", label: "15" },
+    { value: "20", label: "20" },
+    { value: "25", label: "25" },
+    { value: "30", label: "30" },
+    { value: "40", label: "40" },
+    { value: "50", label: "50" },
+    { value: "60", label: "60" },
+  ];
+
+
   return (
     <div>
       <form onSubmit={form.onSubmit(handleSendMessage)}>
-        <Box maw={400} mx={"auto"}>
+        <Box maw={400} >
           <Select
             mt="md"
             withinPortal
             withAsterisk
             required
-            data={[
-              { value: "6 a 8", label: "6 a 8" },
-              { value: "10 a 12", label: "10 a 12" },
-              { value: "15", label: "15" },
-              { value: "20", label: "20" },
-              { value: "25", label: "25" },
-              { value: "30", label: "30" },
-              { value: "40", label: "40" },
-              { value: "50", label: "50" },
-              { value: "60", label: "60" },
-            ]}
+            data={porciones}
             placeholder="Elige una opcion"
             label="Porciones"
             classNames={classes}
@@ -199,14 +217,7 @@ export function ContainedInputs() {
             withinPortal
             withAsterisk
             required
-            data={[
-              { value: "Chocolate", label: "Chocolate" },
-              { value: "Limon", label: "Limon" },
-              { value: "Naranja", label: "Naranja" },
-              { value: "Red velvet", label: "Red velvet" },
-              { value: "Vainilla", label: "Vainilla" },
-              { value: "Zanahoria", label: "Zanahoria" },
-            ]}
+            data={sabores}
             {...form.getInputProps("saborBiscocho")}
             placeholder="Elige una opcion"
             label="Sabores Bizcocho"
@@ -218,15 +229,7 @@ export function ContainedInputs() {
             withinPortal
             withAsterisk
             required
-            data={[
-              { value: "Chocolate blanco", label: "Chocolate blanco" },
-              { value: "Chocolate semi amargo", label: "Chocolate semi amargo" },
-              { value: "Manjar", label: "Manjar" },
-              { value: "Mermelada de berries", label: "Mermelada de berries" },
-              { value: "Mermelada de duraznos", label: "Mermelada de duraznos" },
-              { value: "Mermelada de frutilla", label: "Mermelada de frutilla" },
-              { value: "Mocca", label: "Mocca" },
-            ]}
+            data={rellenos}
             {...form.getInputProps("relleno")}
             placeholder="Elige una opcion"
             label="Rellenos"
@@ -275,7 +278,9 @@ export function ContainedInputs() {
             placeholder="Escribe tus requerimientos especiales" 
             {...form.getInputProps("requerimientosEspeciales")}
           />
-          <h1>Valor:{precioTotal}</h1>
+          {/* <h1>Precio Final:</h1> */}
+          <Text  
+            mt="md" c="green.8" fw={700} fz="xl">Precio Final: ${precioTotal}</Text>
           <Button mt="md" type="submit">
             Enviar por whatsapp
           </Button>

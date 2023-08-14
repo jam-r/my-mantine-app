@@ -8,11 +8,10 @@ import LightAndDarkModeButton from "./LightDarkButtons";
 function Home() {
   return (
     <div className="App">
-      <Paper style={{ minHeight: "100vh" }}>
+     
         {/* <HeaderSimple links={links}></HeaderSimple> */}
         
         <Cards></Cards>
-      </Paper>
     </div>
   );
 }
