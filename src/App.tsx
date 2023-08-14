@@ -51,13 +51,14 @@ function App() {
         {/* <LightAndDarkModeButton></LightAndDarkModeButton> */}
           <BrowserRouter>
             <HeaderResponsive links={links2}></HeaderResponsive>
-            <Paper style={{ minHeight: "100vh" }} mt="md">
+            <Paper style={{ minHeight: "100vh" }} mt="md" mb="md">
             <Routes>
               <Route path="/my-mantine-app" element={<Home></Home>}></Route>
               <Route path="/my-mantine-app/detail" element={<Detail></Detail>}></Route>
             </Routes>
-            <FooterSocial></FooterSocial>
+            
             </Paper>
+            <FooterSocial ></FooterSocial>
           </BrowserRouter>
           
     </div>
