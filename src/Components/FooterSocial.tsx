@@ -32,7 +32,7 @@ export function FooterSocial() {
 
   return (
     <div className={classes.footer}>
-      <Container className={classes.inner}>
+      <Container className={classes.inner} >
         <div className="logo" ></div>
         <Group spacing={0} className={classes.links} position="right" noWrap>
           <ActionIcon size="lg" component='a' href='https://www.instagram.com/creandomomentos_cl/'>

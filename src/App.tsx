@@ -56,7 +56,6 @@ function App() {
               <Route path="/my-mantine-app" element={<Home></Home>}></Route>
               <Route path="/my-mantine-app/detail" element={<Detail></Detail>}></Route>
             </Routes>
-            
             </Paper>
             <FooterSocial ></FooterSocial>
           </BrowserRouter>
