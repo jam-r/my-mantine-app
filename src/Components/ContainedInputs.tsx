@@ -10,6 +10,7 @@ import {
 } from "@mantine/core";
 import { isNotEmpty, useForm } from "@mantine/form";
 import { useState } from "react";
+import { BrandWhatsapp } from 'tabler-icons-react';
 
 const useStyles = createStyles((theme) => ({
   root: {
@@ -199,7 +200,8 @@ export function ContainedInputs() {
   return (
     <div>
       <form onSubmit={form.onSubmit(handleSendMessage)}>
-        <Box maw={400} >
+        
+        <Box maw={400}   mt="md" mb="md" >
           <Select
             mt="md"
             withinPortal
@@ -278,10 +280,9 @@ export function ContainedInputs() {
             placeholder="Escribe tus requerimientos especiales" 
             {...form.getInputProps("requerimientosEspeciales")}
           />
-          {/* <h1>Precio Final:</h1> */}
           <Text  
-            mt="md" c="green.8" fw={700} fz="xl">Precio Final: ${precioTotal}</Text>
-          <Button mt="md" type="submit">
+            mt="md" c="light-blue" fw={700} fz="xl">Precio Final: ${precioTotal}</Text>
+          <Button className="whatsapp-btn" mt="md" type="submit" leftIcon={<BrandWhatsapp size="1rem" />}>
             Enviar por whatsapp
           </Button>
         </Box>

@@ -18,6 +18,7 @@ const useStyles = createStyles((theme) => ({
   root: {
     position: 'relative',
     zIndex: 1,
+    background: 'var(--mantine-color-linen-1)',
   },
 
   dropdown: {
@@ -77,8 +78,8 @@ const useStyles = createStyles((theme) => ({
 
   linkActive: {
     '&, &:hover': {
-      backgroundColor: theme.fn.variant({ variant: 'light', color: theme.primaryColor }).background,
-      color: theme.fn.variant({ variant: 'light', color: theme.primaryColor }).color,
+      // backgroundColor: theme.fn.variant({ variant: 'light', color: theme.primaryColor }).background,
+      // color: theme.fn.variant({ variant: 'light', color: theme.primaryColor }).color,
     },
   },
 }));

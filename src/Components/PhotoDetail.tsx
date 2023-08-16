@@ -49,7 +49,7 @@ export function PhotoDetail() {
   ));
 
   return (
-    <Card radius="md" withBorder padding="xl">
+    <Card  mt="md" mb="md" className="cards" radius="md" withBorder padding="xl">
       <Card.Section>
         <Carousel
           withIndicators
@@ -71,7 +71,7 @@ export function PhotoDetail() {
 
       </Group>
 
-      <Text fz="sm" c="dimmed" mt="sm">
+      <Text fz="sm"  mt="sm" >
       Delicada y esponjosa torta de biscocho: el placer perfecto en cada bocado. ¡Sorprende tus sentidos con su textura suave y sabor exquisito!
       </Text>
 

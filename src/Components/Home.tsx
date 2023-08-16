@@ -7,7 +7,7 @@ import LightAndDarkModeButton from "./LightDarkButtons";
 
 function Home() {
   return (
-    <div className="App">
+    <div className="App" >
      
         {/* <HeaderSimple links={links}></HeaderSimple> */}
         

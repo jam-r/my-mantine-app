@@ -2,11 +2,7 @@ import { createStyles, Container, Group, ActionIcon, rem } from '@mantine/core';
 import { IconBrandTwitter, IconBrandYoutube, IconBrandInstagram, IconBrandFacebook } from '@tabler/icons-react';
 
 const useStyles = createStyles((theme) => ({
-  footer: {
-    borderTop: `${rem(1)} solid ${
-      theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[2]
-    }`,
-  },
+  
 
   inner: {
     display: 'flex',
@@ -31,7 +27,7 @@ export function FooterSocial() {
   const { classes } = useStyles();
 
   return (
-    <div className={classes.footer}>
+    <div className='secondary-background'>
       <Container className={classes.inner} >
         {/* <div className="logo" ></div> */}
         <Group spacing={0} className={classes.links} position="right" noWrap>
