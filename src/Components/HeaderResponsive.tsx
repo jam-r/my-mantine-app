@@ -16,7 +16,7 @@ const HEADER_HEIGHT = rem(60);
 
 const useStyles = createStyles((theme) => ({
   root: {
-    position: 'relative',
+    position: 'sticky',
     zIndex: 1,
     background: 'var(--mantine-color-linen-1)',
   },
@@ -112,7 +112,7 @@ export function HeaderResponsive({ links }: HeaderResponsiveProps) {
 
   return (
     <Header height={HEADER_HEIGHT} className={classes.root}>
-      <Container className={classes.header}>
+      <Container className={classes.header} >
       <div className="logo" ></div>
         <Group spacing={5} className={classes.links}>
           {items}
