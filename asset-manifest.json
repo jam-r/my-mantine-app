@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/my-mantine-app/static/css/main.dc492039.css",
-    "main.js": "/my-mantine-app/static/js/main.5f77a373.js",
+    "main.css": "/my-mantine-app/static/css/main.6007888b.css",
+    "main.js": "/my-mantine-app/static/js/main.ad7d4e40.js",
     "static/js/787.5e15adf4.chunk.js": "/my-mantine-app/static/js/787.5e15adf4.chunk.js",
-    "static/media/logo.jpg": "/my-mantine-app/static/media/logo.24e8c51334f575a3e004.jpg",
+    "static/media/logo.png": "/my-mantine-app/static/media/logo.ff9eccf9e5c68bd14924.png",
     "index.html": "/my-mantine-app/index.html",
-    "main.dc492039.css.map": "/my-mantine-app/static/css/main.dc492039.css.map",
-    "main.5f77a373.js.map": "/my-mantine-app/static/js/main.5f77a373.js.map",
+    "main.6007888b.css.map": "/my-mantine-app/static/css/main.6007888b.css.map",
+    "main.ad7d4e40.js.map": "/my-mantine-app/static/js/main.ad7d4e40.js.map",
     "787.5e15adf4.chunk.js.map": "/my-mantine-app/static/js/787.5e15adf4.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.dc492039.css",
-    "static/js/main.5f77a373.js"
+    "static/css/main.6007888b.css",
+    "static/js/main.ad7d4e40.js"
   ]
 }
