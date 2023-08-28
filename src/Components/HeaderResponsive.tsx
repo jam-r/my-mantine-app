@@ -113,7 +113,8 @@ export function HeaderResponsive({ links }: HeaderResponsiveProps) {
   return (
     <Header height={HEADER_HEIGHT} className={classes.root}>
       <Container className={classes.header} >
-      <div className="logo" ></div>
+        <a href='' onClick={()=>navigate("/my-mantine-app")}>
+      <div className="logo"  ></div></a>
         <Group spacing={5} className={classes.links}>
           {items}
         </Group>

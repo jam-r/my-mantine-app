@@ -1,9 +1,4 @@
-import {
-  Paper,
-} from "@mantine/core";
-
 import Cards from "./Cards";
-import LightAndDarkModeButton from "./LightDarkButtons";
 
 function Home() {
   return (
